@@ -17,7 +17,6 @@ const signUpSchema = joi.object({
 });
 
 const tweetSchema = joi.object({
-  username: joi.string().required(),
   tweet: joi.string().required(),
 });
 
@@ -58,7 +57,7 @@ app.get("/tweets", (req, res) => {
 });
 
 app.post("/tweets", validateSchemaMiddleware(tweetSchema), (req, res) => {
-  let username = req.body.username;
+  let username = req.headers.user;
   let tweet = req.body.tweet;
 
   const obj = {
